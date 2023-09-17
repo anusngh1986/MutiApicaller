@@ -1,4 +1,4 @@
-package com.demo.MutiApicaller;
+package com.api.MutiApicaller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
