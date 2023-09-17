@@ -1,4 +1,4 @@
-package com.api.MutiApicaller;
+package com.api.ParallelBatchApiProcess;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

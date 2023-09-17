@@ -1,4 +1,4 @@
-package com.api.MutiApicaller;
+package com.api.ParallelBatchApiProcess;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

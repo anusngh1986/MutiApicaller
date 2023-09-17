@@ -1,4 +1,4 @@
-package com.api.MutiApicaller;
+package com.api.ParallelBatchApiProcess;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

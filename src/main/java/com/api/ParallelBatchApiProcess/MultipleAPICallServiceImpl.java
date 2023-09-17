@@ -1,4 +1,4 @@
-package com.api.MutiApicaller;
+package com.api.ParallelBatchApiProcess;
 
 
 import lombok.SneakyThrows;
