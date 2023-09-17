@@ -9,6 +9,8 @@ public class BatchService {
 
     @Autowired
     WebClientApiCaller WebClientApiCaller;
+
+    //This code will call 256 API in parallel,flatmap call 256 API in parallel
     public Flux<Response> callBatch(Batch batch) {
         return Flux.fromIterable(batch.getApis())
                 .flatMap(api -> WebClientApiCaller.callApi(api))
