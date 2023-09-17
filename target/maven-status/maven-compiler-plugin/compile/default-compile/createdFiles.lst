@@ -1,0 +1,9 @@
+com\demo\MutiApicaller\Response.class
+com\demo\MutiApicaller\Configuration.class
+com\demo\MutiApicaller\WebClientApiCaller.class
+com\demo\MultipleAPICallApplication.class
+com\demo\MutiApicaller\MultipleAPICallController.class
+com\demo\MutiApicaller\MultipleAPICallService.class
+com\demo\MutiApicaller\MultipleAPICallServiceImpl.class
+com\demo\MutiApicaller\Batch.class
+com\demo\MutiApicaller\BatchService.class
