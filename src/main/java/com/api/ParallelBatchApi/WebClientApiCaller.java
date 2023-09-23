@@ -1,4 +1,4 @@
-package com.api.ParallelBatchApiProcess;
+package com.api.ParallelBatchApi;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -14,6 +14,10 @@ public class WebClientApiCaller {
     }
 
     public Mono<String> callApi(String api) {
-        return webClient.get().uri(api).retrieve().bodyToMono(String.class);
+        return webClient.get()
+                .uri(api)
+                .retrieve()
+                .bodyToMono(String.class)
+                .cache(); // Cache the response to avoid making duplicate API calls
     }
 }

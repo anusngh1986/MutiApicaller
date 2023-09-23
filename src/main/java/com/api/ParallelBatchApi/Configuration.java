@@ -1,4 +1,4 @@
-package com.api.ParallelBatchApiProcess;
+package com.api.ParallelBatchApi;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.reactive.function.client.WebClient;

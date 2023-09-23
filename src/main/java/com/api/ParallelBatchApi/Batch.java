@@ -1,15 +1,14 @@
-package com.api.ParallelBatchApiProcess;
+package com.api.ParallelBatchApi;
 
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
 @Component
 // Batch class will hold list of API's
 public class Batch {
 
-    private List<String> apis;
+    private final List<String> apis;
 
     public Batch(List<String> apis) {
         this.apis = apis;
@@ -17,9 +16,5 @@ public class Batch {
 
     public List<String> getApis() {
         return apis;
-    }
-
-    public void setApis(List<String> apis) {
-        this.apis = apis;
     }
 }

@@ -1,4 +1,4 @@
-package com.api.ParallelBatchApiProcess;
+package com.api.ParallelBatchApi;
 
 public class Response {
 
