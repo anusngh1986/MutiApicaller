@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class MultipleAPICallServiceImpl implements MultipleAPICallService {
@@ -30,11 +31,15 @@ public class MultipleAPICallServiceImpl implements MultipleAPICallService {
         apis.add("https://official-joke-api.appspot.com/random_joke");
         apis.add("https://official-joke-api.appspot.com/random_joke");
 
+
         // Split the APIs into batches of 1000
-        List<Batch> batches = new ArrayList<>();
-        for (int i = 0; i < apis.size(); i += 1000) {
-            batches.add(new Batch(apis.subList(i, Math.min(i + 1000, apis.size()))));
-        }
+        List<Batch> batches = IntStream.range(0, apis.size())
+                .boxed()
+                .collect(Collectors.groupingBy(i -> i / 1000))
+                .values()
+                .stream()
+                .map(indices -> new Batch(indices.stream().map(apis::get).collect(Collectors.toList())))
+                .collect(Collectors.toList());
 
         // Create an executor service to call the batches in parallel
         ExecutorService executorService = Executors.newFixedThreadPool(3);
@@ -50,18 +55,15 @@ public class MultipleAPICallServiceImpl implements MultipleAPICallService {
         // Shut down the executor service
         executorService.shutdown();
 
-        // Wait for all the batches to finish calling
+        // Create a list to store the merged responses
+        List<Flux<Response>> mergedResponses = new ArrayList<>();
+
+        // Wait for all the batches to finish calling and collect the responses
         for (Future<Flux<Response>> future : futures) {
-            future.get();
+            mergedResponses.add(future.get());
         }
 
         // Merge the responses from the batches into a single Flux
-        return Flux.merge(futures.stream().map(future -> {
-            try {
-                return future.get();
-            } catch (InterruptedException | ExecutionException e) {
-                throw new RuntimeException(e);
-            }
-        }).collect(Collectors.toList()));
+        return Flux.merge(mergedResponses);
     }
 }
