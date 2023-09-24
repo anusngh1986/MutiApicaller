@@ -1,6 +1,5 @@
 package com.api.ParallelBatchApi;
 
-
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -8,11 +7,8 @@ import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import static java.util.stream.Collectors.toList;
+import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 @Service
 public class MultipleAPICallServiceImpl implements MultipleAPICallService {
@@ -33,7 +29,6 @@ public class MultipleAPICallServiceImpl implements MultipleAPICallService {
         apis.add("https://official-joke-api.appspot.com/random_joke");
         apis.add("https://official-joke-api.appspot.com/random_joke");
         apis.add("https://official-joke-api.appspot.com/random_joke");
-
 
         // Split the APIs into batches of 1000
         List<Batch> batches = new ArrayList<>();
@@ -64,11 +59,9 @@ public class MultipleAPICallServiceImpl implements MultipleAPICallService {
         return Flux.merge(futures.stream().map(future -> {
             try {
                 return future.get();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            } catch (ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 throw new RuntimeException(e);
             }
-        }).collect(toList()));
+        }).collect(Collectors.toList()));
     }
 }
