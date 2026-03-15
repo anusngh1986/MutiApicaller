@@ -23,6 +23,9 @@ public class MultipleAPICallServiceImpl implements MultipleAPICallService {
     @Override
     public Flux<Response> multipleApiCall() {
         List<String> apis = properties.getDefaultApis();
+        if (apis == null || apis.isEmpty()) {
+            return Flux.empty();
+        }
         return callApis(apis);
     }
 
