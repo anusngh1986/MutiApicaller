@@ -1,11 +1,7 @@
-package com.api.ParallelBatchApiProcess;
-
-import org.springframework.stereotype.Component;
+package com.api.parallelbatchapiprocess;
 
 import java.util.List;
 
-
-@Component
 // Batch class will hold list of API's
 public class Batch {
 
